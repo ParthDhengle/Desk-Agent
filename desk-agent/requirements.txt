@@ -1,6 +1,9 @@
+# requirements.txt
+
 # Core AI & Agent Frameworks
 crewai[tools]>=0.152.0,<1.0.0
 litellm
+langchain-google-genai # <-- ADD THIS for Gemini
 torch
 transformers
 sentence-transformers

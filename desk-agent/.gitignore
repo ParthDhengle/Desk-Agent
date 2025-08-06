@@ -1,1 +1,4 @@
 everything_sdk
+.venv/
+__pycache__/
+.env

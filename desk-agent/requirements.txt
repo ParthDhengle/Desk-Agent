@@ -1,0 +1,16 @@
+# Core AI & Agent Frameworks
+crewai
+litellm
+torch
+transformers
+sentence-transformers
+faiss-cpu
+
+# Audio Processing
+sounddevice
+scipy
+numpy
+
+# Utilities
+python-dotenv
+pyeverything 

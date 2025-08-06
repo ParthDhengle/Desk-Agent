@@ -1,0 +1,17 @@
+# src/agents/config/tasks.yaml
+planning_task:
+  description: >
+    Create a detailed, step-by-step plan for the following request: {topic}.
+    The plan should list every file to be created, every command to be run, and
+    the purpose of each piece of code that needs to be written.
+  expected_output: >
+    A markdown document containing a numbered list of clear, sequential steps.
+
+coding_task:
+  description: >
+    Based on the provided plan, write the Python code for the request: {topic}.
+    Execute the plan step-by-step, focusing only on writing the code for any
+    Python files mentioned in the plan. Do not execute shell commands.
+  expected_output: >
+    The complete, functional Python code required to accomplish the task,
+    formatted in markdown code blocks.

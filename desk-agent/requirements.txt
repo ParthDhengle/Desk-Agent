@@ -1,5 +1,5 @@
 # Core AI & Agent Frameworks
-crewai
+crewai[tools]>=0.152.0,<1.0.0
 litellm
 torch
 transformers
@@ -13,4 +13,3 @@ numpy
 
 # Utilities
 python-dotenv
-pyeverything 

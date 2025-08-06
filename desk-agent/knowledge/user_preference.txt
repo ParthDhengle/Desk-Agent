@@ -1,0 +1,5 @@
+# knowledge/user_preference.txt
+User name is Parth Dhengle.
+User is a developer working on a project named DeskAgent.
+User prefers Python for scripting tasks.
+User is based in Pune, India.

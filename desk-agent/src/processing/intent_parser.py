@@ -98,10 +98,11 @@ async def parse_intent(user_text: str) -> dict | None:
     print("🤖 Parsing intent...")
     llm_response = await get_llm_response(messages=messages, model_name=INTENT_MODEL)
 
+
     if not llm_response:
         return None
 
     # Use our utility to safely extract the JSON from the response
     parsed_json = extract_json_from_response(llm_response)
-
+    print(parsed_json)
     return parsed_json

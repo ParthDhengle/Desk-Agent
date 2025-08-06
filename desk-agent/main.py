@@ -1,43 +1,41 @@
 # main.py
 
 import asyncio
-import pprint  # Used for printing dictionaries nicely
+from src.ui.app_window import AppWindow
 
-from src.processing.intent_parser import parse_intent
+class AsyncTkinterLoop:
+    """A class to bridge asyncio and Tkinter's mainloop."""
+    def __init__(self, app):
+        self.app = app
+        self.loop = app.loop
+        self.running = True
 
-async def main():
-    """
-    Main asynchronous loop for the DeskAgent.
-    For Step 1, it's a simple command-line interface to test the parser.
-    """
-    print("🚀 DeskAgent Parser Initialized. Type 'exit' to quit.")
-    print("-" * 30)
+    def run(self):
+        try:
+            self.app.protocol("WM_DELETE_WINDOW", self.on_closing)
+            self.loop.run_until_complete(self.tk_loop())
+        except KeyboardInterrupt:
+            self.on_closing()
 
-    while True:
-        user_input = input("🧑 You: ")
-        if user_input.lower() == "exit":
-            break
+    async def tk_loop(self):
+        while self.running:
+            try:
+                self.app.update()
+                await asyncio.sleep(0.01)
+            except tk.TclError: # Handle window being closed
+                self.running = False
 
-        if not user_input.strip():
-            continue
-
-        # Call our asynchronous parser
-        parsed_command = await parse_intent(user_input)
-
-        if parsed_command:
-            print("✅ Parsed Command:")
-            pprint.pprint(parsed_command)
-        else:
-            print("❌ Could not parse command.")
-        
-        print("-" * 30)
+    def on_closing(self):
+        self.running = False
 
 if __name__ == "__main__":
-    # Ensure Ollama is running with the 'phi3' model before starting.
-    # To run: `ollama run phi3` in your terminal.
+    print("🚀 Initializing DeskAgent...")
+    print("   Please ensure Ollama and Everything services are running.")
+
+    event_loop = asyncio.get_event_loop()
+    app_window = AppWindow(loop=event_loop)
     
-    # Run the main async function
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print("\nExiting DeskAgent.")
+    async_loop = AsyncTkinterLoop(app_window)
+    async_loop.run()
+    
+    print("DeskAgent has shut down.")
